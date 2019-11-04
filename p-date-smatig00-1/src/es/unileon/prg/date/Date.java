@@ -7,12 +7,22 @@ public class Date {
 	private int year;
 	
 	/*
-	 * Constructor of the class
+	 * Constructor of the Date class
 	 */
-	public Date(int day, int month, int year) {
+	public Date(int day, int month, int year) throws DateException {
 		this.year = year;
-		this.month = month;
-		this.day = day;
+		if(month < 1 || month > 12) {
+			throw new DateException("Month " + month + " not valid \nPossible values between 1 and 12");
+		
+		}else {
+			this.month = month;
+		}
+		if(day < 1 || day > 31) {
+			throw new DateException("Day " + day + " not valid \nPossible value between 1 and 31");
+		
+		}else {
+			this.day = day;
+		}
 	}
 	
 	/*
@@ -24,10 +34,9 @@ public class Date {
 		this.day = today.getDay();
 	}
 
-	/**
-	 * Metodos get y set
+	/*
+	 * 	getters and setters	
 	 */
-	
 	public int getDay() {
 		return this.day;
 	}
@@ -52,7 +61,9 @@ public class Date {
 		this.year = year;
 	}
 	
-
+	/*
+	 * Method that prints the date
+	 */
 	public String toString() {
 		return this.day + " / " + this.month + "/" + this.year;
 	}
@@ -289,7 +300,7 @@ public class Date {
 	/*
 	 * For a date, count the number of  days since the first day of  the year (do not consider leap years).
 	 */
-	public int daysPast() {
+	public int daysPast() throws DateException{
 		int count = 0;
 		Date aux = new Date(1,1,this.year);
 		
@@ -346,7 +357,7 @@ public class Date {
 	/*
 	 * For a given date and knowing the day of the week of the first day of the year of that date, return the day of the week of the given date.
 	 */
-	public String dayOfWeek(int day) {
+	public String dayOfWeek(int day) throws DateException {
 		int name;
 		name = (daysPast() % 7 + day) % 7;
 		
